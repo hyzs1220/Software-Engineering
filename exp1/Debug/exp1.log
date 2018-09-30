@@ -1,0 +1,5 @@
+﻿  exp1.cpp
+d:\study\软件工程\实验\exp1\exp1.cpp(24): warning C4101: “i”: 未引用的局部变量
+    正在创建库 D:\study\软件工程\实验\exp1\Debug\exp1.lib 和对象 D:\study\软件工程\实验\exp1\Debug\exp1.exp
+  exp1.vcxproj -> D:\study\软件工程\实验\exp1\Debug\exp1.exe
+  exp1.vcxproj -> D:\study\软件工程\实验\exp1\Debug\exp1.pdb (Full PDB)
