@@ -47,7 +47,7 @@ int main()
 	{
 		poSrcDS->GetRasterBand(i + 1)->RasterIO(GF_Read,
 			0, 0, imgXlen, imgYlen, buffTmp, imgXlen, imgYlen, GDT_Byte, 0, 0);
-		poSrcDS->GetRasterBand(i + 1)->RasterIO(GF_Write,
+		poDstDS->GetRasterBand(i + 1)->RasterIO(GF_Write,
 			0, 0, imgXlen, imgYlen, buffTmp, imgXlen, imgYlen, GDT_Byte, 0, 0);
 		cout << " ... ... band " << i << " processing ... ..." << endl;
 	}
