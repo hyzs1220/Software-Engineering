@@ -34,29 +34,29 @@ superman.jpg
  + 这样便可以通过flag数组来找到满足条件的像素点。然后读取space图像和superman图像，从space图像中选取背景，从superman图像中选取超人部门，然后写入到新建图像中，完成抠像操作。  
 
 ```c++
-for (int i = 0; i < bandNum; i++)
-{
-	//读取两个图像像素
-	poSrcDS->GetRasterBand(i + 1)->RasterIO(GF_Read,
-		0, 0, imgXlen, imgYlen, buffTmp, imgXlen, imgYlen, GDT_Byte, 0, 0);
-	poSrcDS_bg->GetRasterBand(i + 1)->RasterIO(GF_Read,
-		0, 0, imgXlen, imgYlen, buffTmp_bg, imgXlen, imgYlen, GDT_Byte, 0, 0);
-
-
-	for (int j = 0; j < imgYlen; j++)
+	for (int i = 0; i < bandNum; i++)
 	{
-		for (int k = 0; k < imgXlen; k++)
+		//读取两个图像像素
+		poSrcDS->GetRasterBand(i + 1)->RasterIO(GF_Read,
+			0, 0, imgXlen, imgYlen, buffTmp, imgXlen, imgYlen, GDT_Byte, 0, 0);
+		poSrcDS_bg->GetRasterBand(i + 1)->RasterIO(GF_Read,
+			0, 0, imgXlen, imgYlen, buffTmp_bg, imgXlen, imgYlen, GDT_Byte, 0, 0);
+
+
+		for (int j = 0; j < imgYlen; j++)
 		{
-			if (flag[j][k] == 1) {	//根据flag标志，来确定像素点来源
-				buffTmp[j*imgXlen + k] = buffTmp_bg[j*imgXlen + k];
+			for (int k = 0; k < imgXlen; k++)
+			{
+				if (flag[j][k] == 1) {	//根据flag标志，来确定像素点来源
+					buffTmp[j*imgXlen + k] = buffTmp_bg[j*imgXlen + k];
+				}
 			}
 		}
+		//写入新建图像
+		poDstDS->GetRasterBand(i + 1)->RasterIO(GF_Write,
+			0, 0, imgXlen, imgYlen, buffTmp, imgXlen, imgYlen, GDT_Byte, 0, 0);
+		cout << " ... ... band " << i << " processing ... ..." << endl;
 	}
-	//写入新建图像
-	poDstDS->GetRasterBand(i + 1)->RasterIO(GF_Write,
-		0, 0, imgXlen, imgYlen, buffTmp, imgXlen, imgYlen, GDT_Byte, 0, 0);
-	cout << " ... ... band " << i << " processing ... ..." << endl;
-}
 ```
 
 + 好好学习，天天向上~  
